@@ -2,24 +2,37 @@ version: '3'
 
 services:
   client-portal:
-    image: lazzariagenciaweb/portal-cliente:latest
-    build: .
+    # Imagem gerada automaticamente pelo GitHub Actions
+    image: ghcr.io/lazzariagenciaweb/members_azz:latest
+    # build: .  <-- Removido pois Swarm não suporta build
     restart: always
     # ports:
     #   - "3000:3000" # Desativado para usar Traefik
     expose:
       - "3000"
     networks:
-      - proxy # IMPORTANTE: Verifique se o nome da rede do seu Traefik é 'proxy', 'web' ou 'traefik_public'
+      - network_public
     environment:
       - NODE_ENV=production
+    # Configuração para Docker Swarm (Recomendado pois sua rede é Swarm)
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.portal-cliente.rule=Host(`app.azzagencia.com.br`)"
+        - "traefik.http.routers.portal-cliente.entrypoints=websecure"
+        - "traefik.http.routers.portal-cliente.tls.certresolver=myresolver"
+        - "traefik.http.services.portal-cliente.loadbalancer.server.port=3000"
+    # Configuração para Docker Normal (Compatibilidade)
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portal-cliente.rule=Host(`members.azzagencia.com.br`)"
+      - "traefik.http.routers.portal-cliente.rule=Host(`app.azzagencia.com.br`)"
       - "traefik.http.routers.portal-cliente.entrypoints=websecure"
-      - "traefik.http.routers.portal-cliente.tls.certresolver=myresolver" # Geralmente é 'myresolver' ou 'letsencrypt'
+      - "traefik.http.routers.portal-cliente.tls.certresolver=myresolver"
       - "traefik.http.services.portal-cliente.loadbalancer.server.port=3000"
 
 networks:
-  proxy:
+  network_public:
     external: true
