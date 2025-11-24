@@ -2,10 +2,8 @@ version: '3'
 
 services:
   client-portal:
-    container_name: portal-cliente
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: lazzariagenciaweb/portal-cliente:latest
+    build: .
     restart: always
     ports:
       - "3000:3000"
