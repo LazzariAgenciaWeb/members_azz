@@ -5,7 +5,21 @@ services:
     image: lazzariagenciaweb/portal-cliente:latest
     build: .
     restart: always
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000" # Desativado para usar Traefik
+    expose:
+      - "3000"
+    networks:
+      - proxy # IMPORTANTE: Verifique se o nome da rede do seu Traefik é 'proxy', 'web' ou 'traefik_public'
     environment:
       - NODE_ENV=production
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portal-cliente.rule=Host(`members.azzagencia.com.br`)"
+      - "traefik.http.routers.portal-cliente.entrypoints=websecure"
+      - "traefik.http.routers.portal-cliente.tls.certresolver=myresolver" # Geralmente é 'myresolver' ou 'letsencrypt'
+      - "traefik.http.services.portal-cliente.loadbalancer.server.port=3000"
+
+networks:
+  proxy:
+    external: true
