@@ -3,7 +3,7 @@ version: '3'
 services:
   client-portal:
     # Imagem gerada automaticamente pelo GitHub Actions
-    image: ghcr.io/lazzariagenciaweb/members_azz:latest
+    image: ghcr.io/lazzariagenciaweb/members_azz:sha-8a53853
     # build: .  <-- Removido pois Swarm não suporta build
     restart: always
     # ports:
