@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Send } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 export default function NewTicketPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setIsSubmitting(true);
 
