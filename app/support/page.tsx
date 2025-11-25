@@ -4,34 +4,43 @@ import { ArrowLeft, MessageSquare, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 
-const tickets = [
-    {
-        id: "T-1024",
-        subject: "Site fora do ar",
-        status: "open",
-        priority: "high",
-        date: "Hoje, 10:30",
-        category: "Suporte Técnico",
-    },
-    {
-        id: "T-1023",
-        subject: "Alteração de senha de e-mail",
-        status: "in_progress",
-        priority: "medium",
-        date: "Ontem, 15:45",
-        category: "Acesso",
-    },
-    {
-        id: "T-1020",
-        subject: "Solicitação de nova arte para Instagram",
-        status: "closed",
-        priority: "low",
-        date: "20 Nov, 2025",
-        category: "Design",
-    },
-];
+type TicketStatus = "open" | "in_progress" | "closed";
 
-const statusMap: Record<string, { label: string; color: string }> = {
+const tickets: {
+    id: string;
+    subject: string;
+    status: TicketStatus;
+    priority: string;
+    date: string;
+    category: string;
+}[] = [
+        {
+            id: "T-1024",
+            subject: "Site fora do ar",
+            status: "open",
+            priority: "high",
+            date: "Hoje, 10:30",
+            category: "Suporte Técnico",
+        },
+        {
+            id: "T-1023",
+            subject: "Alteração de senha de e-mail",
+            status: "in_progress",
+            priority: "medium",
+            date: "Ontem, 15:45",
+            category: "Acesso",
+        },
+        {
+            id: "T-1020",
+            subject: "Solicitação de nova arte para Instagram",
+            status: "closed",
+            priority: "low",
+            date: "20 Nov, 2025",
+            category: "Design",
+        },
+    ];
+
+const statusMap: Record<TicketStatus, { label: string; color: string }> = {
     open: { label: "Aberto", color: "bg-red-500/10 text-red-500" },
     in_progress: { label: "Em Andamento", color: "bg-blue-500/10 text-blue-500" },
     closed: { label: "Resolvido", color: "bg-green-500/10 text-green-500" },
