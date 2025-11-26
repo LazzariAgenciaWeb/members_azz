@@ -23,6 +23,9 @@ export function Navbar() {
                     <Link href="/assets" className="hover:text-foreground transition-colors">
                         Arquivos
                     </Link>
+                    <Link href="/dashboard/finance" className="hover:text-foreground transition-colors">
+                        Financeiro
+                    </Link>
                 </div>
                 <div className="flex items-center gap-4">
                     <form action={logout}>
