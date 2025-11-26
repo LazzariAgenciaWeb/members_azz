@@ -34,50 +34,56 @@ export default function LoginPage() {
                         Entrar com Email
                     </Button>
 
-                    <div className="relative my-4">
-                        <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t border-muted" />
-                        </div>
-                        <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-background px-2 text-muted-foreground">
-                                Acesso Rápido (Teste)
-                            </span>
-                        </div>
-                    </div>
+                </form>
 
-                    <div className="grid grid-cols-3 gap-2">
+                <div className="relative my-4">
+                    <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t border-muted" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">
+                            Acesso Rápido (Teste)
+                        </span>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                    <form action={login} className="contents">
+                        <input type="hidden" name="email" value="admin@azz.com" />
                         <Button
                             type="submit"
-                            name="email"
-                            value="admin@azz.com"
                             variant="outline"
                             className="w-full text-xs border-red-500/20 hover:bg-red-500/10 hover:text-red-500"
                         >
                             Admin
                         </Button>
-                        <form action={login} className="flex-1">
-                            <input type="hidden" name="email" value="staff-adm@azz.com" />
-                            <Button variant="outline" className="w-full border-blue-500/50 hover:bg-blue-500/10 text-blue-400">
-                                Staff (Adm)
-                            </Button>
-                        </form>
-                        <form action={login} className="flex-1">
-                            <input type="hidden" name="email" value="staff-prod@azz.com" />
-                            <Button variant="outline" className="w-full border-purple-500/50 hover:bg-purple-500/10 text-purple-400">
-                                Staff (Prod)
-                            </Button>
-                        </form>
+                    </form>
+
+                    <form action={login} className="contents">
+                        <input type="hidden" name="email" value="cliente@azz.com" />
                         <Button
                             type="submit"
-                            name="email"
-                            value="cliente@azz.com"
                             variant="outline"
                             className="w-full text-xs border-green-500/20 hover:bg-green-500/10 hover:text-green-500"
                         >
                             Cliente
                         </Button>
-                    </div>
-                </form>
+                    </form>
+
+                    <form action={login} className="contents">
+                        <input type="hidden" name="email" value="staff-adm@azz.com" />
+                        <Button variant="outline" className="w-full border-blue-500/50 hover:bg-blue-500/10 text-blue-400">
+                            Staff (Adm)
+                        </Button>
+                    </form>
+
+                    <form action={login} className="contents">
+                        <input type="hidden" name="email" value="staff-prod@azz.com" />
+                        <Button variant="outline" className="w-full border-purple-500/50 hover:bg-purple-500/10 text-purple-400">
+                            Staff (Prod)
+                        </Button>
+                    </form>
+                </div>
 
                 <p className="text-center text-xs text-muted-foreground">
                     Ao clicar em continuar, você concorda com nossos termos de serviço e política de privacidade.
