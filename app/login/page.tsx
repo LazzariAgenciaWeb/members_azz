@@ -31,8 +31,49 @@ export default function LoginPage() {
                         />
                     </div>
                     <Button type="submit" className="w-full font-semibold" size="lg">
-                        Enviar Link de Acesso
+                        Entrar com Email
                     </Button>
+
+                    <div className="relative my-4">
+                        <div className="absolute inset-0 flex items-center">
+                            <span className="w-full border-t border-muted" />
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                            <span className="bg-background px-2 text-muted-foreground">
+                                Acesso Rápido (Teste)
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2">
+                        <Button
+                            type="submit"
+                            name="email"
+                            value="admin@azz.com"
+                            variant="outline"
+                            className="w-full text-xs border-red-500/20 hover:bg-red-500/10 hover:text-red-500"
+                        >
+                            Admin
+                        </Button>
+                        <Button
+                            type="submit"
+                            name="email"
+                            value="staff@azz.com"
+                            variant="outline"
+                            className="w-full text-xs border-blue-500/20 hover:bg-blue-500/10 hover:text-blue-500"
+                        >
+                            Equipe
+                        </Button>
+                        <Button
+                            type="submit"
+                            name="email"
+                            value="cliente@azz.com"
+                            variant="outline"
+                            className="w-full text-xs border-green-500/20 hover:bg-green-500/10 hover:text-green-500"
+                        >
+                            Cliente
+                        </Button>
+                    </div>
                 </form>
 
                 <p className="text-center text-xs text-muted-foreground">
