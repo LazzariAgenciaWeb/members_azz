@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { MonitorPlay, LogOut } from "lucide-react";
+import { logout } from "@/app/actions";
 
 export function Navbar() {
     return (
@@ -24,11 +22,7 @@ export function Navbar() {
                     </Link>
                 </div>
                 <div className="flex items-center gap-4">
-                    <form action={async () => {
-                        'use server'
-                        const { logout } = await import('@/app/actions')
-                        await logout()
-                    }}>
+                    <form action={logout}>
                         <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                             <LogOut className="mr-2 h-4 w-4" />
                             Sair

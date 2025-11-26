@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users, LogOut, Briefcase, MessageSquare, LayoutDashboard } from "lucide-react";
+import { logout } from "@/app/actions";
 
 export function StaffNavbar() {
     return (
@@ -30,11 +31,7 @@ export function StaffNavbar() {
                     <div className="text-xs text-muted-foreground mr-2">
                         Equipe AZZ
                     </div>
-                    <form action={async () => {
-                        'use server'
-                        const { logout } = await import('@/app/actions')
-                        await logout()
-                    }}>
+                    <form action={logout}>
                         <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                             <LogOut className="mr-2 h-4 w-4" />
                             Sair
