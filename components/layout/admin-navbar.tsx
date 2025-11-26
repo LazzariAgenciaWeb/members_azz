@@ -30,12 +30,16 @@ export function AdminNavbar() {
                     <div className="text-xs text-muted-foreground mr-2">
                         Super Admin
                     </div>
-                    <Link href="/login">
+                    <form action={async () => {
+                        'use server'
+                        const { logout } = await import('@/app/actions')
+                        await logout()
+                    }}>
                         <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                             <LogOut className="mr-2 h-4 w-4" />
                             Sair
                         </Button>
-                    </Link>
+                    </form>
                 </div>
             </div>
         </nav>

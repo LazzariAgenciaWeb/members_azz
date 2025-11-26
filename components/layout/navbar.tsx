@@ -24,10 +24,16 @@ export function Navbar() {
                     </Link>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Sair
-                    </Button>
+                    <form action={async () => {
+                        'use server'
+                        const { logout } = await import('@/app/actions')
+                        await logout()
+                    }}>
+                        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                            <LogOut className="mr-2 h-4 w-4" />
+                            Sair
+                        </Button>
+                    </form>
                 </div>
             </div>
         </nav>

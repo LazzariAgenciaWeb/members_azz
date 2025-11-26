@@ -11,9 +11,16 @@ export async function login(formData: FormData) {
 
     console.log('Login attempt for:', email)
 
+    // Determine role based on email (Mock Logic)
+    let role = 'client';
+    if (email.includes('admin')) role = 'admin';
+    else if (email.includes('staff') || email.includes('colab')) role = 'staff';
+
     // Set mock session cookie
     const cookieStore = await cookies()
-    cookieStore.set('session', 'mock-session-token', {
+    const sessionData = JSON.stringify({ email, role });
+
+    cookieStore.set('session', sessionData, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 24 * 7, // 1 week
@@ -21,4 +28,10 @@ export async function login(formData: FormData) {
     })
 
     redirect('/dashboard')
+}
+
+export async function logout() {
+    const cookieStore = await cookies()
+    cookieStore.delete('session')
+    redirect('/login')
 }
