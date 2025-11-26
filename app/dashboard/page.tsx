@@ -4,6 +4,8 @@ import { Service } from "@/types";
 import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+export const dynamic = 'force-dynamic';
+
 const activeServices: Service[] = [
     {
         id: "website",
