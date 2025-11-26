@@ -12,6 +12,17 @@ export function Navbar() {
                         Portal do Cliente
                     </span>
                 </Link>
+                <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+                    <Link href="/dashboard" className="hover:text-foreground transition-colors">
+                        Início
+                    </Link>
+                    <Link href="/support" className="hover:text-foreground transition-colors">
+                        Suporte
+                    </Link>
+                    <Link href="/assets" className="hover:text-foreground transition-colors">
+                        Arquivos
+                    </Link>
+                </div>
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                         <LogOut className="mr-2 h-4 w-4" />
