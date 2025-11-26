@@ -38,6 +38,15 @@ export default function LoginPage() {
                 <p className="text-center text-xs text-muted-foreground">
                     Ao clicar em continuar, você concorda com nossos termos de serviço e política de privacidade.
                 </p>
+
+                <div className="rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-4 text-sm text-yellow-500">
+                    <p className="font-semibold mb-1">🧪 Modo de Teste:</p>
+                    <ul className="list-disc list-inside space-y-1 text-xs opacity-90">
+                        <li>Para <strong>Admin</strong>: use um email com "admin" (ex: admin@azz.com)</li>
+                        <li>Para <strong>Colaborador</strong>: use um email com "staff" (ex: staff@azz.com)</li>
+                        <li>Para <strong>Cliente</strong>: qualquer outro email</li>
+                    </ul>
+                </div>
             </div>
         </div>
     );
