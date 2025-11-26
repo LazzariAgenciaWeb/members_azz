@@ -12,13 +12,20 @@ export async function login(formData: FormData) {
     console.log('Login attempt for:', email)
 
     // Determine role based on email (Mock Logic)
-    let role = 'client';
-    if (email.includes('admin')) role = 'admin';
-    else if (email.includes('staff') || email.includes('colab')) role = 'staff';
+    let role: 'admin' | 'staff' | 'client' = 'client';
+    let department: 'administrative' | 'production' | undefined = undefined;
+
+    if (email.includes('admin')) {
+        role = 'admin';
+    } else if (email.includes('staff')) {
+        role = 'staff';
+        if (email.includes('adm')) department = 'administrative';
+        if (email.includes('prod')) department = 'production';
+    }
 
     // Set mock session cookie
     const cookieStore = await cookies()
-    const sessionData = JSON.stringify({ email, role });
+    const sessionData = JSON.stringify({ email, role, department });
 
     cookieStore.set('session', sessionData, {
         httpOnly: true,

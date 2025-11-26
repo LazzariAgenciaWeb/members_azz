@@ -55,15 +55,18 @@ export default function LoginPage() {
                         >
                             Admin
                         </Button>
-                        <Button
-                            type="submit"
-                            name="email"
-                            value="staff@azz.com"
-                            variant="outline"
-                            className="w-full text-xs border-blue-500/20 hover:bg-blue-500/10 hover:text-blue-500"
-                        >
-                            Equipe
-                        </Button>
+                        <form action={login} className="flex-1">
+                            <input type="hidden" name="email" value="staff-adm@azz.com" />
+                            <Button variant="outline" className="w-full border-blue-500/50 hover:bg-blue-500/10 text-blue-400">
+                                Staff (Adm)
+                            </Button>
+                        </form>
+                        <form action={login} className="flex-1">
+                            <input type="hidden" name="email" value="staff-prod@azz.com" />
+                            <Button variant="outline" className="w-full border-purple-500/50 hover:bg-purple-500/10 text-purple-400">
+                                Staff (Prod)
+                            </Button>
+                        </form>
                         <Button
                             type="submit"
                             name="email"
