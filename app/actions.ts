@@ -27,7 +27,13 @@ export async function login(formData: FormData) {
         path: '/',
     })
 
-    redirect('/dashboard')
+    if (role === 'admin') {
+        redirect('/admin')
+    } else if (role === 'staff') {
+        redirect('/staff')
+    } else {
+        redirect('/dashboard')
+    }
 }
 
 export async function logout() {
