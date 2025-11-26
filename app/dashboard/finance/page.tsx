@@ -2,7 +2,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Invoice } from "@/types";
-import { FileText, Download, AlertCircle, CheckCircle, Clock } from "lucide-react";
+import { FileText, Download, AlertCircle, Clock } from "lucide-react";
+import { PixDialog } from "@/components/finance/pix-dialog";
 
 export const dynamic = 'force-dynamic';
 
@@ -36,7 +37,15 @@ const invoices: Invoice[] = [
     },
 ];
 
+const PIX_KEY = "27641120000124";
+
 export default function FinancePage() {
+    const totalPending = invoices
+        .filter(inv => inv.status === 'pending' || inv.status === 'overdue')
+        .reduce((acc, inv) => acc + inv.amount, 0);
+
+    const pendingCount = invoices.filter(inv => inv.status === 'pending' || inv.status === 'overdue').length;
+
     return (
         <div className="min-h-screen bg-background pb-20">
             <Navbar />
@@ -53,7 +62,7 @@ export default function FinancePage() {
 
                 <div className="grid gap-6">
                     {/* Summary Cards */}
-                    <div className="grid gap-4 md:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-2">
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
@@ -71,28 +80,16 @@ export default function FinancePage() {
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
-                                    Total Pago
-                                </CardTitle>
-                                <CheckCircle className="h-4 w-4 text-green-500" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold">R$ 2.450,00</div>
-                                <p className="text-xs text-muted-foreground">
-                                    Últimos 30 dias
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium">
-                                    Pendências
+                                    Total Pendente
                                 </CardTitle>
                                 <AlertCircle className="h-4 w-4 text-red-500" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">1 Fatura</div>
+                                <div className="text-2xl font-bold text-red-500">
+                                    {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalPending)}
+                                </div>
                                 <p className="text-xs text-muted-foreground">
-                                    Em aberto
+                                    {pendingCount} fatura(s) em aberto
                                 </p>
                             </CardContent>
                         </Card>
@@ -146,14 +143,21 @@ export default function FinancePage() {
                                                 </span>
                                             </div>
 
-                                            <div className="flex gap-2">
+                                            <div className="flex flex-wrap gap-2 justify-end">
+                                                {invoice.status !== 'paid' && (
+                                                    <PixDialog
+                                                        amount={invoice.amount}
+                                                        description={invoice.description}
+                                                        pixKey={PIX_KEY}
+                                                    />
+                                                )}
                                                 <Button variant="outline" size="sm" className="gap-2" disabled={!invoice.boletoUrl}>
                                                     <Download className="h-4 w-4" />
                                                     <span className="hidden sm:inline">Boleto</span>
                                                 </Button>
                                                 <Button variant="outline" size="sm" className="gap-2" disabled={!invoice.invoiceUrl}>
                                                     <FileText className="h-4 w-4" />
-                                                    <span className="hidden sm:inline">Nota Fiscal</span>
+                                                    <span className="hidden sm:inline">NF</span>
                                                 </Button>
                                             </div>
                                         </div>
